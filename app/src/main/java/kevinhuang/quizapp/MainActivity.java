@@ -11,8 +11,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private TextView mTextView;
     private Button mTrueButton;
     private Button mFalsebutton;
+
+    private Question firstQuestion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,14 +26,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mTrueButton.setOnClickListener(this);
         mFalsebutton.setOnClickListener(this);
+
+        mTextView = (TextView) findViewById(R.id.text_view);
+
+        firstQuestion = new Question(R.string.question_1, true);
+        mTextView.setText(firstQuestion.getTextResId());
     }
 
     @Override
     public void onClick(View view) {
-        TextView myTextView = (TextView) view;
-        Toast myToast = Toast.makeText(this, "You just clicked"+ myTextView.getText(), Toast.LENGTH_SHORT);
-        myToast.show();
-        myToast.setGravity(Gravity.TOP,0,0);
+
+        if (view.getId() == R.id.true_button && firstQuestion.getAnswer() == true) {
+            Toast myToast = Toast.makeText(this, "You are correct", Toast.LENGTH_SHORT);
+            myToast.show();
+        }
+        else if (view.getId() == R.id.false_button && firstQuestion.getAnswer() == false) {
+            Toast myToast = Toast.makeText(this, "You are correct", Toast.LENGTH_SHORT);
+            myToast.show();
+        }
+        else{
+            Toast myToast = Toast.makeText(this, "You are incorrect", Toast.LENGTH_SHORT);
+            myToast.show();
+        }
+
+
 
     }
 }
