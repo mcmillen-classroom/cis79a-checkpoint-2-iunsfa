@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">QuizApp</string>
     <string name="question_text">Placeholder for first question...</string>
+
     <string name="true_button">True</string>
     <string name="false_button">False</string>
 
+    <string name="next_button">Next</string>
+
     <string name="question_1">Does Saitama and Genos live in Z City?</string>
     <string name="question_2">Is Mumen Rider the best hero?</string>
-    <string name="question_3">Is it true that One Punch Man started out as a Webcomic?</string>
+    <string name="question_3">Is it true that One Punch Man started out as a manga?</string>
     <string name="question_4">Can Atomic Samurai move fast enough to slash lightning?</string>
     <string name="question_5">The manga is farther ahead than the webcomic.</string>
 </resources>
