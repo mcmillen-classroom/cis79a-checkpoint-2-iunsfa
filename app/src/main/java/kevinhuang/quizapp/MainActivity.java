@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mNextButton;
     private ImageButton mPrevButton;
     private Button mHintButton;
+    private Button mResetButton;
 
 
     private Question[] mQuestions;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNextButton = (ImageButton) findViewById(R.id.next_button);
         mPrevButton = (ImageButton) findViewById(R.id.prev_button);
         mHintButton = (Button) findViewById(R.id.hint_button);
+        mResetButton = (Button) findViewById(R.id.reset_button);
 
 
         mTrueButton.setOnClickListener(this);
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNextButton.setOnClickListener(this);
         mPrevButton.setOnClickListener(this);
         mHintButton.setOnClickListener(this);
+        mResetButton.setOnClickListener(this);
 
         mTextView = (TextView) findViewById(R.id.text_view);
         mScoreTextView = (TextView) findViewById(R.id.score_text_view);
@@ -68,10 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        int counter = 0;
-        counter++;
+
         if (view.getId() == R.id.true_button) {
             checkAnswer(true);
+
 
 
 
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         else if (view.getId() == R.id.false_button ) {
             checkAnswer(false);
+
         }
 
         else if(view.getId() == R.id.prev_button){
@@ -92,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //change to the next question
             //increment the index by 1
             mIndex++;
+            mFalsebutton.setEnabled(true);
+            mTrueButton.setEnabled(true);
+
 
 
 
@@ -107,9 +114,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast myToast2 = Toast.makeText(this,mQuestions[mIndex].getmHintTextResId(), Toast.LENGTH_LONG);
             myToast2.show();
         }
+        else if(view.getId() == R.id.reset_button){
+            mScoreTextView.setText("Score: "+ 0);
+        }
         if(mIndex>4 || mIndex<0){
             mIndex = 0;
+
         }
+
+
 
         mTextView.setText(mQuestions[mIndex].getTextResId());
 
@@ -117,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
         public boolean checkAnswer(boolean userInput){
             if(mQuestions[mIndex].getAnswer() == userInput){
+                mFalsebutton.setEnabled(false);
+                mTrueButton.setEnabled(false);
                 mScore++;
                 mScoreTextView.setText("Score: "+ mScore);
                 Toast myToast = Toast.makeText(this, "You are correct", Toast.LENGTH_SHORT);
@@ -124,8 +139,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
 
 
+
             }
             else{
+                mFalsebutton.setEnabled(false);
+                mTrueButton.setEnabled(false);
                 mScore--;
                 mScoreTextView.setText("Score: "+ mScore);
                 Toast myToast = Toast.makeText(this, "You are incorrect", Toast.LENGTH_SHORT);
