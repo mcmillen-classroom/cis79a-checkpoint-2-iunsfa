@@ -3,7 +3,6 @@ package kevinhuang.quizapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,15 +12,17 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTextView;
+    private TextView mScoreTextView;
     private Button mTrueButton;
     private Button mFalsebutton;
     private ImageButton mNextButton;
     private ImageButton mPrevButton;
+    private Button mHintButton;
 
 
     private Question[] mQuestions;
     private int mIndex;
-    public int mScore;
+    private int mScore;
 
 
 
@@ -34,13 +35,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFalsebutton = (Button) findViewById(R.id.false_button);
         mNextButton = (ImageButton) findViewById(R.id.next_button);
         mPrevButton = (ImageButton) findViewById(R.id.prev_button);
+        mHintButton = (Button) findViewById(R.id.hint_button);
+
 
         mTrueButton.setOnClickListener(this);
         mFalsebutton.setOnClickListener(this);
         mNextButton.setOnClickListener(this);
         mPrevButton.setOnClickListener(this);
+        mHintButton.setOnClickListener(this);
 
         mTextView = (TextView) findViewById(R.id.text_view);
+        mScoreTextView = (TextView) findViewById(R.id.score_text_view);
 
 
 
@@ -58,13 +63,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //go to whichever question is represented by mIndex
         mTextView.setText(mQuestions[mIndex].getTextResId());
+        mScoreTextView.setText("Score: "+ mScore);
     }
 
     @Override
     public void onClick(View view) {
-
+        int counter = 0;
+        counter++;
         if (view.getId() == R.id.true_button) {
             checkAnswer(true);
+
+
+
         }
 
         else if (view.getId() == R.id.false_button ) {
@@ -100,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(mIndex>4 || mIndex<0){
             mIndex = 0;
         }
+
         mTextView.setText(mQuestions[mIndex].getTextResId());
 
 
@@ -107,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public boolean checkAnswer(boolean userInput){
             if(mQuestions[mIndex].getAnswer() == userInput){
                 mScore++;
+                mScoreTextView.setText("Score: "+ mScore);
                 Toast myToast = Toast.makeText(this, "You are correct", Toast.LENGTH_SHORT);
                 myToast.show();
                 return true;
@@ -115,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else{
                 mScore--;
+                mScoreTextView.setText("Score: "+ mScore);
                 Toast myToast = Toast.makeText(this, "You are incorrect", Toast.LENGTH_SHORT);
                 myToast.show();
                 return false;

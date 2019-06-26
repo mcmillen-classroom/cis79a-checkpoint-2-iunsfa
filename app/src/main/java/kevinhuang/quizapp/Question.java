@@ -5,6 +5,7 @@ public class Question {
     private boolean mAnswer;
     private int mHintTextResId;
 
+
     public Question(int textResId, boolean answer, int hintTextResId) {
         mTextResId = textResId;
         mAnswer = answer;
@@ -30,4 +31,5 @@ public class Question {
     public int getmHintTextResId() {
         return mHintTextResId;
     }
+
 }
