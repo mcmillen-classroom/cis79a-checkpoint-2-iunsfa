@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             myToast2.show();
         }
         else if(view.getId() == R.id.reset_button){
-            mScoreTextView.setText("Score: "+ 0);
+            mScore = 0;
+            mScoreTextView.setText("Score: "+ mScore);
         }
         if(mIndex>4 || mIndex<0){
             mIndex = 0;
